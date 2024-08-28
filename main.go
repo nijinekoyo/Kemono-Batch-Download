@@ -21,12 +21,12 @@ import (
 
 func main() {
 	// 解析参数
-	Service := flag.String("service", "", "服务")
-	User := flag.String("user", "", "用户ID")
-	Query := flag.String("query", "", "搜索关键词")
-	SavePath := flag.String("save_path", "data/", "保存路径")
-	FileNameFilter := flag.String("file_name_filter", "", "仅下载文件名包含的文件")
-	ExtensionFilter := flag.String("extension_filter", "", "仅下载指定扩展名的文件")
+	Service := flag.String("service", "", "Service platform")
+	User := flag.String("user", "", "Creator User ID")
+	Query := flag.String("query", "", "Search Keywords")
+	SavePath := flag.String("save_path", "data/", "File save root path")
+	FileNameFilter := flag.String("file_name_filter", "", "Filter file names when downloading")
+	ExtensionFilter := flag.String("extension_filter", "", "Filter file extensions when downloading")
 	flag.Parse()
 
 	if *Service == "" || *User == "" {
