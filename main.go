@@ -63,7 +63,7 @@ func main() {
 				continue
 			}
 			// 检查扩展名过滤
-			if *ExtensionFilter != "" && filepath.Ext(Attachment.Path) != *ExtensionFilter {
+			if *ExtensionFilter != "" && (filepath.Ext(Attachment.Path) != *ExtensionFilter || filepath.Ext(Attachment.Name) != *ExtensionFilter) {
 				// 扩展名不匹配则跳过
 				continue
 			}
