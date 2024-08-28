@@ -1,7 +1,7 @@
 /*
  * @Author: nijineko
  * @Date: 2024-08-26 19:54:53
- * @LastEditTime: 2024-08-27 20:15:55
+ * @LastEditTime: 2024-08-28 09:13:32
  * @LastEditors: nijineko
  * @Description: main file
  * @FilePath: \kemonoDownload\main.go
@@ -50,6 +50,9 @@ func main() {
 			break
 		}
 	}
+
+	// 启动文件清理任务，程序退出时清理当前正在下载的文件
+	go download.StartClear()
 
 	// 下载文章附件
 	for Index, CreatorPost := range CreatorPosts {

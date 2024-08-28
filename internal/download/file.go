@@ -17,6 +17,11 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
+var (
+	DownloadingFilePath string
+	DownloadingFile     *os.File
+)
+
 /**
  * @description: 下载文件
  * @param {string} URL 文件地址
@@ -56,6 +61,10 @@ func File(URL string, SavePath string) (int, error) {
 		return 0, err
 	}
 	defer File.Close()
+
+	// 赋值当前下载文件信息
+	DownloadingFilePath = SavePath
+	DownloadingFile = File
 
 	// 写入文件
 	Size, err := io.Copy(io.MultiWriter(File, Progressbar), Response.Body)
