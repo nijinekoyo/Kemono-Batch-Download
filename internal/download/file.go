@@ -1,7 +1,7 @@
 /*
  * @Author: nijineko
  * @Date: 2024-08-27 19:41:02
- * @LastEditTime: 2024-08-27 20:05:55
+ * @LastEditTime: 2024-09-01 05:30:29
  * @LastEditors: nijineko
  * @Description: 下载文件封装
  * @FilePath: \kemonoDownload\internal\download\file.go
@@ -69,6 +69,15 @@ func File(URL string, SavePath string) (int, error) {
 	// 写入文件
 	Size, err := io.Copy(io.MultiWriter(File, Progressbar), Response.Body)
 	if err != nil {
+		// 删除下载失败的文件
+		err := File.Close()
+		if err == nil {
+			err = os.Remove(SavePath)
+			if err != nil {
+				return 0, err
+			}
+		}
+
 		return 0, err
 	}
 
