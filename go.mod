@@ -2,7 +2,10 @@ module kemonoDownload
 
 go 1.22.2
 
-require github.com/schollz/progressbar/v3 v3.14.6
+require (
+	github.com/HyacinthusAcademy/yuzuhttp v0.2.0
+	github.com/schollz/progressbar/v3 v3.14.6
+)
 
 require (
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect

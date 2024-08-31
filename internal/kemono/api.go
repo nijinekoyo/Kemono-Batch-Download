@@ -1,7 +1,7 @@
 /*
  * @Author: nijineko
  * @Date: 2024-08-26 19:57:25
- * @LastEditTime: 2024-08-27 19:35:43
+ * @LastEditTime: 2024-09-01 05:27:25
  * @LastEditors: nijineko
  * @Description: Kemono API封装
  * @FilePath: \kemonoDownload\internal\kemono\api.go
@@ -9,9 +9,9 @@
 package kemono
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
+
+	"github.com/HyacinthusAcademy/yuzuhttp"
 )
 
 const (
@@ -42,34 +42,6 @@ type CreatorPost struct {
 }
 
 /**
- * @description: 组成GET请求参数
- * @param {map[string]string} Parameters 参数
- * @return {string} 参数拼接
- */
-func getParameterSplice(Parameters map[string]string) string {
-	if len(Parameters) == 0 {
-		return ""
-	}
-
-	var URL string
-	for Key, Parameter := range Parameters {
-		if Parameter == "" {
-			continue
-		}
-
-		if URL == "" {
-			URL += "?"
-		} else {
-			URL += "&"
-		}
-
-		URL += fmt.Sprintf("%s=%s", Key, Parameter)
-	}
-
-	return URL
-}
-
-/**
  * @description: 获取创作者文章列表
  * @param {string} Service 服务
  * @param {string} User 用户ID
@@ -89,18 +61,10 @@ func GetCreatorPosts(Service string, User string, Query string, Offset int) ([]C
 		"q": Query,
 		"o": OffsetString,
 	}
-	URL += getParameterSplice(GetParameters)
 
 	// 发起请求
-	Response, err := http.Get(URL)
-	if err != nil {
-		return nil, err
-	}
-
-	// 读取返回
 	var CreatorPosts []CreatorPost
-	err = json.NewDecoder(Response.Body).Decode(&CreatorPosts)
-	if err != nil {
+	if err := yuzuhttp.Get(URL).SetURLValues(GetParameters).Do().BodyJSON(&CreatorPosts); err != nil {
 		return nil, err
 	}
 

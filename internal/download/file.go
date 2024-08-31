@@ -10,10 +10,10 @@ package download
 
 import (
 	"io"
-	"net/http"
 	"os"
 	"path"
 
+	"github.com/HyacinthusAcademy/yuzuhttp"
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -30,9 +30,9 @@ var (
  * @return {error} 错误
  */
 func File(URL string, SavePath string) (int, error) {
-	Response, err := http.Get(URL)
-	if err != nil {
-		return 0, err
+	Response := yuzuhttp.Get(URL).Do()
+	if Response.Error != nil {
+		return 0, Response.Error
 	}
 
 	// 创建进度条
@@ -51,7 +51,7 @@ func File(URL string, SavePath string) (int, error) {
 		}))
 
 	// 创建文件夹
-	err = os.MkdirAll(path.Dir(SavePath), 0644)
+	err := os.MkdirAll(path.Dir(SavePath), 0644)
 	if err != nil {
 		return 0, err
 	}
