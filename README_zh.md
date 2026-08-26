@@ -10,14 +10,17 @@
 ```
 
 ## Command Parameters
-|     Parameter     |      Description       |    Example     |
-| :---------------: | :--------------------: | :------------: |
-|     -service      |    创作者所属的平台    |     fanbox     |
-|       -user       |     创作者的用户ID     |    6570768     |
-|      -query       |       搜索关键词       | 始まりました！ |
-|    -save_path     |     文件保存根路径     |    ./data/     |
-| -file_name_filter | 下载时按文件名过滤文件 |      風俗      |
-| -extension_filter | 下载时按扩展名过滤文件 |      .mp4      |
+|        Parameter         |       Description        |      Example      |
+| :----------------------: | :----------------------: | :---------------: |
+|         -service         |     创作者所属的平台     |      fanbox       |
+|          -user           |      创作者的用户ID      |      6570768      |
+|          -query          |        搜索关键词        |  始まりました！   |
+|        -save_path        |      文件保存根路径      |      ./data/      |
+|    -file_name_filter     |  下载时按文件名过滤文件  |       風俗        |
+|    -extension_filter     |  下载时按扩展名过滤文件  |       .mp4        |
+|          -host           |     Kemono Host 地址     | https://kemono.su |
+|    -file_server_host     |   Kemono文件服务器地址   | https://kemono.su |
+| -file_server_path_prefix | Kemono文件服务器路径前缀 |       /data       |
 
 ## Build
 需要 `Go >= 1.22.2`

@@ -1,7 +1,7 @@
 /*
  * @Author: nijineko
  * @Date: 2024-08-26 19:57:25
- * @LastEditTime: 2024-09-01 05:27:25
+ * @LastEditTime: 2026-08-26 16:27:39
  * @LastEditors: nijineko
  * @Description: Kemono API封装
  * @FilePath: \kemonoDownload\internal\kemono\api.go
@@ -10,13 +10,13 @@ package kemono
 
 import (
 	"fmt"
+	"kemonoDownload/internal/flag"
 
 	"github.com/HyacinthusAcademy/yuzuhttp"
 )
 
-const (
-	Host    = "https://kemono.su" // Kemono Host地址
-	APIPath = Host + "/api/v1"    // Kemono API地址
+var (
+	APIPath = "/api/v1" // Kemono API地址
 )
 
 // 文章文件类型
@@ -51,7 +51,7 @@ type CreatorPost struct {
  * @return {error} 错误
  */
 func GetCreatorPosts(Service string, User string, Query string, Offset int) ([]CreatorPost, error) {
-	URL := APIPath + fmt.Sprintf("/%s/user/%s", Service, User)
+	URL := flag.Get().Host + APIPath + fmt.Sprintf("/%s/user/%s", Service, User)
 
 	// 偏移量转换为String
 	OffsetString := fmt.Sprintf("%d", Offset)

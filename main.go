@@ -1,7 +1,7 @@
 /*
  * @Author: nijineko
  * @Date: 2024-08-26 19:54:53
- * @LastEditTime: 2024-08-28 09:13:32
+ * @LastEditTime: 2026-08-26 16:29:31
  * @LastEditors: nijineko
  * @Description: main file
  * @FilePath: \kemonoDownload\main.go
@@ -74,7 +74,7 @@ func main() {
 			}
 
 			// 下载文件
-			Size, err := download.File(kemono.Host+Attachment.Path, SavePath)
+			Size, err := download.File(flag.Get().FileServerHost+flag.Get().FileServerPathPrefix+Attachment.Path, SavePath)
 			if err != nil {
 				fmt.Println("Download", Attachment.Name, "failed:", err)
 				continue

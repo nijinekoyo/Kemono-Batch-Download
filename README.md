@@ -12,14 +12,17 @@ Use the API provided by [Kemono](https://kemono.su/) to batch download all artic
 ```
 
 ## Command Parameters
-|     Parameter     |                    Description                    |    Example     |
-| :---------------: | :-----------------------------------------------: | :------------: |
-|     -service      | The service platform to which the creator belongs |     fanbox     |
-|       -user       |                  Creator User ID                  |    6570768     |
-|      -query       |                  Search Keywords                  | 始まりました！ |
-|    -save_path     |                File save root path                |    ./data/     |
-| -file_name_filter |        Filter file names when downloading         |      風俗      |
-| -extension_filter |      Filter file extensions when downloading      |      .mp4      |
+|        Parameter         |                    Description                    |      Example      |
+| :----------------------: | :-----------------------------------------------: | :---------------: |
+|         -service         | The service platform to which the creator belongs |      fanbox       |
+|          -user           |                  Creator User ID                  |      6570768      |
+|          -query          |                  Search Keywords                  |  始まりました！   |
+|        -save_path        |                File save root path                |      ./data/      |
+|    -file_name_filter     |        Filter file names when downloading         |       風俗        |
+|    -extension_filter     |      Filter file extensions when downloading      |       .mp4        |
+|          -host           |                Kemono Host address                | https://kemono.su |
+|    -file_server_host     |            Kemono file server address             | https://kemono.su |
+| -file_server_path_prefix |          Kemono file server path prefix           |       /data       |
 
 ## Build
 Need have `Go >= 1.22.2`
