@@ -9,9 +9,9 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"kemonoDownload/internal/download"
+	"kemonoDownload/internal/flag"
 	"kemonoDownload/internal/kemono"
 	"os"
 	"path"
@@ -20,16 +20,10 @@ import (
 )
 
 func main() {
-	// 解析参数
-	Service := flag.String("service", "", "Service platform")
-	User := flag.String("user", "", "Creator User ID")
-	Query := flag.String("query", "", "Search Keywords")
-	SavePath := flag.String("save_path", "data/", "File save root path")
-	FileNameFilter := flag.String("file_name_filter", "", "Filter file names when downloading")
-	ExtensionFilter := flag.String("extension_filter", "", "Filter file extensions when downloading")
-	flag.Parse()
+	// 初始化参数解析
+	flag.Init()
 
-	if *Service == "" || *User == "" {
+	if flag.Get().Service == "" || flag.Get().User == "" {
 		fmt.Println("Usage: kemonoDownload -service <service> -user <user> [-query <query>] [-save_path <save_path>] [-file_name_filter <file_name_filter>] [-extension_filter <extension_filter>]")
 		return
 	}
@@ -37,7 +31,7 @@ func main() {
 	// 获取全部文章信息
 	var CreatorPosts []kemono.CreatorPost
 	for {
-		Posts, err := kemono.GetCreatorPosts(*Service, *User, *Query, len(CreatorPosts))
+		Posts, err := kemono.GetCreatorPosts(flag.Get().Service, flag.Get().User, flag.Get().Query, len(CreatorPosts))
 		if err != nil {
 			panic(err)
 		}
@@ -61,18 +55,18 @@ func main() {
 		// 下载所有附件
 		for _, Attachment := range CreatorPost.Attachments {
 			// 检查文件名过滤
-			if *FileNameFilter != "" && !strings.Contains(Attachment.Name, *FileNameFilter) {
+			if flag.Get().FileNameFilter != "" && !strings.Contains(Attachment.Name, flag.Get().FileNameFilter) {
 				// 文件名不包含过滤字符串则跳过
 				continue
 			}
 			// 检查扩展名过滤
-			if *ExtensionFilter != "" && (filepath.Ext(Attachment.Path) != *ExtensionFilter || filepath.Ext(Attachment.Name) != *ExtensionFilter) {
+			if flag.Get().ExtensionFilter != "" && (filepath.Ext(Attachment.Path) != flag.Get().ExtensionFilter || filepath.Ext(Attachment.Name) != flag.Get().ExtensionFilter) {
 				// 扩展名不匹配则跳过
 				continue
 			}
 
 			// 保存路径
-			SavePath := path.Join(*SavePath, *Service, *User, CreatorPost.ID, Attachment.Name)
+			SavePath := path.Join(flag.Get().SavePath, flag.Get().Service, flag.Get().User, CreatorPost.ID, Attachment.Name)
 			// 检查文件是否存在
 			if _, err := os.Stat(SavePath); err == nil {
 				fmt.Println("File", Attachment.Name, "exists, skip")
