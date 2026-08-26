@@ -20,6 +20,7 @@ type FlagData struct {
 	Host                 string // Kemono Host 地址
 	FileServerHost       string // Kemono 文件服务器地址
 	FileServerPathPrefix string // Kemono 文件服务器路径前缀
+	OutputFileLinkOnly   bool   // 仅输出文件链接
 }
 
 // 全局命令参数数据
@@ -48,6 +49,7 @@ func Init() *FlagData {
 	Host := flag.String("host", "https://kemono.su", "Kemono Host address")
 	FileServerHost := flag.String("file_server_host", "https://kemono.su", "Kemono file server address")
 	FileServerPathPrefix := flag.String("file_server_path_prefix", "", "Kemono file server path prefix")
+	OutputFileLinkOnly := flag.Bool("output_file_link_only", false, "Only output file links")
 	flag.Parse()
 
 	// 初始化全局命令参数数据
@@ -63,6 +65,7 @@ func Init() *FlagData {
 	GlobalData.Host = *Host
 	GlobalData.FileServerHost = *FileServerHost
 	GlobalData.FileServerPathPrefix = *FileServerPathPrefix
+	GlobalData.OutputFileLinkOnly = *OutputFileLinkOnly
 
 	return GlobalData
 }

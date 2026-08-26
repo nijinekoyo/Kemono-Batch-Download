@@ -23,6 +23,7 @@ Use the API provided by [Kemono](https://kemono.su/) to batch download all artic
 |          -host           |                Kemono Host address                | https://kemono.su |
 |    -file_server_host     |            Kemono file server address             | https://kemono.su |
 | -file_server_path_prefix |          Kemono file server path prefix           |       /data       |
+|  -output_file_link_only  |              Only output file links               |       false       |
 
 ## Build
 Need have `Go >= 1.22.2`

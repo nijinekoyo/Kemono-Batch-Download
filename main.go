@@ -50,7 +50,9 @@ func main() {
 
 	// 下载文章附件
 	for Index, CreatorPost := range CreatorPosts {
-		fmt.Println("Download", Index+1, "of", len(CreatorPosts), ":", CreatorPost.Title)
+		if !flag.Get().OutputFileLinkOnly {
+			fmt.Println("Download", Index+1, "of", len(CreatorPosts), ":", CreatorPost.Title)
+		}
 
 		// 下载所有附件
 		for _, Attachment := range CreatorPost.Attachments {
@@ -65,6 +67,14 @@ func main() {
 				continue
 			}
 
+			// 拼接下载链接
+			DownloadLink := flag.Get().FileServerHost + flag.Get().FileServerPathPrefix + Attachment.Path
+			if flag.Get().OutputFileLinkOnly {
+				// 仅输出文件链接
+				fmt.Println(DownloadLink)
+				continue
+			}
+
 			// 保存路径
 			SavePath := path.Join(flag.Get().SavePath, flag.Get().Service, flag.Get().User, CreatorPost.ID, Attachment.Name)
 			// 检查文件是否存在
@@ -74,7 +84,7 @@ func main() {
 			}
 
 			// 下载文件
-			Size, err := download.File(flag.Get().FileServerHost+flag.Get().FileServerPathPrefix+Attachment.Path, SavePath)
+			Size, err := download.File(DownloadLink, SavePath)
 			if err != nil {
 				fmt.Println("Download", Attachment.Name, "failed:", err)
 				continue

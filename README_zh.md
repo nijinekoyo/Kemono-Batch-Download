@@ -21,6 +21,7 @@
 |          -host           |     Kemono Host 地址     | https://kemono.su |
 |    -file_server_host     |   Kemono文件服务器地址   | https://kemono.su |
 | -file_server_path_prefix | Kemono文件服务器路径前缀 |       /data       |
+|  -output_file_link_only  |      仅输出文件链接      |       false       |
 
 ## Build
 需要 `Go >= 1.22.2`
